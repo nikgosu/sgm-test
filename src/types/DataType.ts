@@ -1,28 +1,28 @@
-export interface Letter {
+export interface DataLetter {
   value: number | boolean
   dateRelease?: string
 }
 
-export interface Year {
-  XX: Letter,
-  YY: Letter,
-  ZZ: Letter,
+export interface DataYear {
+  XX: DataLetter,
+  YY: DataLetter,
+  ZZ: DataLetter,
 }
 
-export interface Region {
-  2017: Year,
-  2018?: Year,
-  2019?: Year,
+export interface DataRegion {
+  2017: DataYear,
+  2018?: DataYear,
+  2019?: DataYear,
 }
 
-export interface G {
-  G: Region
+export interface DataG {
+  G: DataRegion
 }
 
 export interface Data {
-  Kyivska: G,
-  Odeska: G,
-  Lvivska: G,
+  Kyivska: DataG,
+  Odeska: DataG,
+  Lvivska: DataG,
 }
 
 

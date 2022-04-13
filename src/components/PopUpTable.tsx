@@ -109,14 +109,15 @@ const PopUpTable = () => {
             }
             <TableRow>
               <TableCell>
+                <InputLabel>Value</InputLabel>
                 <TextField
                   value={value}
-                  placeholder='numbers'
                   type='number'
                   onChange={handleChangeValue}
                 />
               </TableCell>
               <TableCell>
+                <InputLabel>Date</InputLabel>
                 <TextField value={currentDate}/>
               </TableCell>
               <TableCell sx={{ m: 1, minWidth: 120 }}>
@@ -134,9 +135,9 @@ const PopUpTable = () => {
                 </Select>
               </TableCell>
               <TableCell>
+                <InputLabel>Comment</InputLabel>
                 <TextField
                   value={comment}
-                  placeholder='text'
                   type='text'
                   onChange={handleCommentChange}
                 />

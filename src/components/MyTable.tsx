@@ -8,7 +8,7 @@ import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import { DATA } from "../data/data";
 import { nanoid } from "nanoid";
-import {DataLetter, DataRegion} from "../types/DataType";
+import {Letter, Region} from "../types/DataType";
 
 const setId = () => {
   return nanoid();
@@ -17,7 +17,7 @@ const setId = () => {
 const MyTable = () => {
   const regions = Object.entries(DATA)
 
-  const getValueCell = (yearsObj: DataRegion): DataLetter[] => {
+  const getValueCell = (yearsObj: Region): Letter[] => {
 
     let result = []
 

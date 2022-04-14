@@ -1,4 +1,4 @@
-import {Data} from "../types/DataType";
+import {Data, PopUpItem} from "../types/DataType";
 
 export const DATA: Data = {
   Kyivska: {
@@ -112,3 +112,24 @@ export const DATA: Data = {
     },
   },
 };
+
+export const PopUpData: PopUpItem[] = [
+  {
+    value: '4',
+    date: new Date().toString(),
+    user: 'Petro',
+    comment: 'any'
+  },
+  {
+    value: '5',
+    date: new Date().toString(),
+    user: 'Roman',
+    comment: 'any'
+  },
+  {
+    value: '6',
+    date: new Date().toString(),
+    user: 'Anna',
+    comment: 'any'
+  },
+]

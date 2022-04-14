@@ -8,6 +8,7 @@ import TableBody from "@mui/material/TableBody"
 import Paper from "@mui/material/Paper"
 import {Button, InputLabel, MenuItem, Select, SelectChangeEvent, TextField} from "@mui/material"
 import {nanoid} from "nanoid"
+import { PopUpData } from '../data/data'
 
 const setId = () => {
   return nanoid();
@@ -15,26 +16,7 @@ const setId = () => {
 
 const PopUpTable = () => {
 
-  const [tableData, setTableData] = useState([
-    {
-      value: '4',
-      date: new Date().toString(),
-      user: 'Petro',
-      comment: 'any'
-    },
-    {
-      value: '5',
-      date: new Date().toString(),
-      user: 'Roman',
-      comment: 'any'
-    },
-    {
-      value: '6',
-      date: new Date().toString(),
-      user: 'Anna',
-      comment: 'any'
-    },
-  ])
+  const [tableData, setTableData] = useState(PopUpData)
 
   const [value, setValue] = useState('')
   const [currentDate, setCurrentDate] = useState('')

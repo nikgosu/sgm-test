@@ -1,4 +1,3 @@
-import './App.css';
 import MyTable from "./components/MyTable"
 import PopUpTable from "./components/PopUpTable"
 import {BrowserRouter ,Route, Routes} from "react-router-dom"

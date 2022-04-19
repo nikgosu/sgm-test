@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react'
+import React, {FC, useEffect, useState} from 'react'
 import TableContainer from "@mui/material/TableContainer"
 import Table from "@mui/material/Table"
 import TableHead from "@mui/material/TableHead"
@@ -8,38 +8,22 @@ import TableBody from "@mui/material/TableBody"
 import Paper from "@mui/material/Paper"
 import {Button, InputLabel, MenuItem, Select, SelectChangeEvent, TextField} from "@mui/material"
 import {nanoid} from "nanoid"
+import { Letter } from '../types/DataType'
 
 const setId = () => {
   return nanoid();
 };
 
-const PopUpTable = () => {
 
-  const [tableData, setTableData] = useState([
-    {
-      value: '4',
-      date: new Date().toString(),
-      user: 'Petro',
-      comment: 'any'
-    },
-    {
-      value: '5',
-      date: new Date().toString(),
-      user: 'Roman',
-      comment: 'any'
-    },
-    {
-      value: '6',
-      date: new Date().toString(),
-      user: 'Anna',
-      comment: 'any'
-    },
-  ])
+const PopUpTable:FC = () => {
 
   const [value, setValue] = useState('')
   const [currentDate, setCurrentDate] = useState('')
   const [currentUser, setCurrentUser] = useState('Roman')
   const [comment, setComment] = useState('')
+  const [item, setItem] = useState<Letter>(JSON.parse(localStorage.getItem('item') ?? ''))
+
+
 
   const handleChangeValue = (e: React.ChangeEvent<HTMLInputElement>) => {
     setValue(e.target.value)
@@ -53,24 +37,24 @@ const PopUpTable = () => {
     setComment(e.target.value)
   }
 
-  const addTableData = () => {
-    setCurrentDate((new Date()).toString())
-    setTableData([...tableData, {
-      value: value,
-      date: currentDate,
-      user: currentUser,
-      comment: comment
-    }])
-    console.log(`
-		value ${value!== '' ? value : '0'},
-		 ${currentUser}, 
-		 ${ comment !== '' ? comment : 'default comment'}
-		 `)
-    setValue('0')
-    setCurrentDate((new Date()).toString())
-    setCurrentUser('Roman')
-    setComment('')
-  }
+  // const addTableData = () => {
+  //   setCurrentDate((new Date()).toString())
+  //   setTableData([...tableData, {
+  //     value: value,
+  //     date: currentDate,
+  //     user: currentUser,
+  //     comment: comment
+  //   }])
+  //   console.log(`
+	// 	value ${value!== '' ? value : '0'},
+	// 	 ${currentUser},
+	// 	 ${ comment !== '' ? comment : 'default comment'}
+	// 	 `)
+  //   setValue('0')
+  //   setCurrentDate((new Date()).toString())
+  //   setCurrentUser('Roman')
+  //   setComment('')
+  // }
 
   useEffect(() => {
     setCurrentDate((new Date()).toString())
@@ -87,7 +71,7 @@ const PopUpTable = () => {
               <TableCell colSpan={1}>user</TableCell>
               <TableCell colSpan={1}>comment</TableCell>
               <TableCell>
-                <Button onClick={addTableData}>Add</Button>
+                {/*<Button onClick={addTableData}>Add</Button>*/}
               </TableCell>
               <TableCell>
                 <Button onClick={() => {
@@ -98,14 +82,16 @@ const PopUpTable = () => {
           </TableHead>
           <TableBody>
             {
-              tableData.map(user => (
+              item?.popupData ? item.popupData.map(user => (
                 <TableRow key={setId()}>
                   <TableCell key={setId()}>{user.value}</TableCell>
                   <TableCell key={setId()}>{user.date.toString()}</TableCell>
                   <TableCell key={setId()}>{user.user}</TableCell>
                   <TableCell key={setId()}>{user.comment}</TableCell>
                 </TableRow>
-              ))
+              )) : <TableRow>
+                <TableCell/>
+              </TableRow>
             }
             <TableRow>
               <TableCell>
@@ -151,3 +137,7 @@ const PopUpTable = () => {
 }
 
 export default PopUpTable
+
+function MyContext(MyContext: any): { xx: any; yy: any } {
+    throw new Error('Function not implemented.')
+}

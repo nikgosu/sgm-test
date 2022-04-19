@@ -1,12 +1,23 @@
+
+export interface PopupItem {
+  value: string,
+  date: string,
+  user: string,
+  comment: string
+}
+
 export interface Letter {
-  value: number | boolean
+  id?: number
+  value: any
   dateRelease?: string
+  popupData?: PopupItem[]
 }
 
 export interface Year {
   XX: Letter,
   YY: Letter,
   ZZ: Letter,
+  WW?: Letter
 }
 
 export interface Region {

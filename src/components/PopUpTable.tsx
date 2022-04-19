@@ -14,16 +14,39 @@ const setId = () => {
   return nanoid();
 };
 
+interface Props {
+  selectedCell: Letter | undefined
+}
 
-const PopUpTable:FC = () => {
+
+const PopUpTable:FC<Props> = (props: Props) => {
+
+  const [tableData, setTableData] = useState([
+    {
+      value: '4',
+      date: new Date().toString(),
+      user: 'Petro',
+      comment: 'any'
+    },
+    {
+      value: '5',
+      date: new Date().toString(),
+      user: 'Roman',
+      comment: 'any'
+    },
+    {
+      value: '6',
+      date: new Date().toString(),
+      user: 'Anna',
+      comment: 'any'
+    },
+  ])
 
   const [value, setValue] = useState('')
   const [currentDate, setCurrentDate] = useState('')
   const [currentUser, setCurrentUser] = useState('Roman')
   const [comment, setComment] = useState('')
-  const [item, setItem] = useState<Letter>(JSON.parse(localStorage.getItem('item') ?? ''))
-
-
+  const [state, setState] = useState<Letter>()
 
   const handleChangeValue = (e: React.ChangeEvent<HTMLInputElement>) => {
     setValue(e.target.value)
@@ -37,29 +60,35 @@ const PopUpTable:FC = () => {
     setComment(e.target.value)
   }
 
-  // const addTableData = () => {
-  //   setCurrentDate((new Date()).toString())
-  //   setTableData([...tableData, {
-  //     value: value,
-  //     date: currentDate,
-  //     user: currentUser,
-  //     comment: comment
-  //   }])
-  //   console.log(`
-	// 	value ${value!== '' ? value : '0'},
-	// 	 ${currentUser},
-	// 	 ${ comment !== '' ? comment : 'default comment'}
-	// 	 `)
-  //   setValue('0')
-  //   setCurrentDate((new Date()).toString())
-  //   setCurrentUser('Roman')
-  //   setComment('')
-  // }
+  const addTableData = () => {
+    setCurrentDate((new Date()).toString())
+    setTableData([...tableData, {
+      value: value,
+      date: currentDate,
+      user: currentUser,
+      comment: comment
+    }])
+    console.log(`
+		value ${value!== '' ? value : '0'},
+		 ${currentUser}, 
+		 ${ comment !== '' ? comment : 'default comment'}
+		 `)
+    setValue('0')
+    setCurrentDate((new Date()).toString())
+    setCurrentUser('Roman')
+    setComment('')
+  }
 
   useEffect(() => {
     setCurrentDate((new Date()).toString())
   }, [])
 
+  useEffect(() => {
+    setState(props.selectedCell)
+  }, [])
+
+
+  console.log(props.selectedCell)
   return (
     <Paper sx={{ width: "100%" }}>
       <TableContainer sx={{ maxHeight: 800 }}>
@@ -71,7 +100,7 @@ const PopUpTable:FC = () => {
               <TableCell colSpan={1}>user</TableCell>
               <TableCell colSpan={1}>comment</TableCell>
               <TableCell>
-                {/*<Button onClick={addTableData}>Add</Button>*/}
+                <Button onClick={addTableData}>Add</Button>
               </TableCell>
               <TableCell>
                 <Button onClick={() => {
@@ -82,7 +111,7 @@ const PopUpTable:FC = () => {
           </TableHead>
           <TableBody>
             {
-              item?.popupData ? item.popupData.map(user => (
+              props?.selectedCell?.popupData ? props.selectedCell.popupData.map(user => (
                 <TableRow key={setId()}>
                   <TableCell key={setId()}>{user.value}</TableCell>
                   <TableCell key={setId()}>{user.date.toString()}</TableCell>

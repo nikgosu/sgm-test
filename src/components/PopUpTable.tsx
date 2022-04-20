@@ -36,7 +36,7 @@ const PopUpTable:FC = (props) => {
   }
 
   const closeWindow = () => {
-    window.opener.postMessage({messege: 'OK!', value: item}, '*')
+    window.opener.postMessage({message: 'OK!', value: item}, '*')
     window.close()
   }
 

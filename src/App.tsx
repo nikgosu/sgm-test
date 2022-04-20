@@ -31,7 +31,7 @@ function App() {
   }, [cellId, isNew])
 
   const getMessege = (e: MessageEvent) => {
-    if (e.data.messege === 'OK!') setEditedCell(e.data.value);
+    if (e.data.message === 'OK!') setEditedCell(e.data.value);
   }
 
   useEffect(() => {

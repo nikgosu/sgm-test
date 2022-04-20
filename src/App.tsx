@@ -1,11 +1,11 @@
-import './App.css';
+import './App.css'
 import MyTable from "./components/MyTable"
 import PopUpTable from "./components/PopUpTable"
-import {BrowserRouter ,Route, Routes} from "react-router-dom"
+import { BrowserRouter, Route, Routes } from "react-router-dom"
 import * as React from 'react'
-import { DATA } from './data/data';
-import {useEffect, useState } from 'react';
-import { Letter, PopupItem, Region, Year } from './types/DataType';
+import { DATA } from './data/data'
+import { useEffect, useState } from 'react'
+import { Letter, PopupItem, Region, Year } from './types/DataType'
 
 function App() {
 
@@ -16,8 +16,8 @@ function App() {
   const [editedCell, setEditedCell] = useState<Letter>()
 
   const handleCellId = (id: number, item: Letter) => {
-    setCellId(id)
     if (!Object.keys(item).length) return
+    setCellId(id)
     setSelectedCell(item)
     localStorage.setItem('item', JSON.stringify(item))
     setIsNew(true)

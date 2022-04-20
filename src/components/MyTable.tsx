@@ -20,8 +20,8 @@ const setId = () => {
 };
 
 const MyTable:FC<Props> = (props: Props) => {
-
   const regions = Object.entries(props.state)
+  const letters = ['xx', 'yy', 'zz', 'ww', 'xx', 'yy', 'zz', 'ww', 'xx', 'yy', 'zz', 'ww']
 
   const getValueCell = (yearsObj: Region): Letter[] => {
 
@@ -89,18 +89,11 @@ const MyTable:FC<Props> = (props: Props) => {
               </TableCell>
             </TableRow>
             <TableRow>
-              <TableCell>xx</TableCell>
-              <TableCell>yy</TableCell>
-              <TableCell>zz</TableCell>
-              <TableCell>ww</TableCell>
-              <TableCell>xx</TableCell>
-              <TableCell>yy</TableCell>
-              <TableCell>zz</TableCell>
-              <TableCell>ww</TableCell>
-              <TableCell>xx</TableCell>
-              <TableCell>yy</TableCell>
-              <TableCell>zz</TableCell>
-              <TableCell>ww</TableCell>
+              {
+                letters.map(letter => (
+                  <TableCell key={setId()}>{letter}</TableCell>
+                ))
+              }
             </TableRow>
           </TableHead>
           <TableBody>

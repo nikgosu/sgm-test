@@ -12,10 +12,13 @@ function App() {
   const [state, setState] = useState(DATA)
   const [cellId, setCellId] = useState(0)
   const [isNew, setIsNew] = useState(false)
+  const [selectedCell, setSelectedCell] = useState<Letter>()
+  const [editedCell, setEditedCell] = useState<Letter>()
 
   const handleCellId = (id: number, item: Letter) => {
     setCellId(id)
     if (!Object.keys(item).length) return
+    setSelectedCell(item)
     localStorage.setItem('item', JSON.stringify(item))
     setIsNew(true)
   }
@@ -27,13 +30,26 @@ function App() {
     }
   }, [cellId, isNew])
 
+  const getMessege = (e: MessageEvent) => {
+    if (e.data.messege === 'OK!') setEditedCell(e.data.value);
+  }
+
+  useEffect(() => {
+    if (selectedCell !== undefined && editedCell !== undefined) {
+      selectedCell.popupData = editedCell.popupData
+    }
+  }, [editedCell])
+
+  useEffect(() => {
+    window.addEventListener('message', getMessege)
+  }, [])
 
 
   return (
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<MyTable state={state} handleCellId={handleCellId}/>}/>
-        <Route path={`/popup/:${cellId}`} element={<PopUpTable />}/>
+        <Route path={`/popup/:${cellId}`} element={<PopUpTable/>}/>
       </Routes>
     </BrowserRouter>
   );

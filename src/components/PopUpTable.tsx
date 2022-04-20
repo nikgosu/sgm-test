@@ -8,22 +8,20 @@ import TableBody from "@mui/material/TableBody"
 import Paper from "@mui/material/Paper"
 import {Button, InputLabel, MenuItem, Select, SelectChangeEvent, TextField} from "@mui/material"
 import {nanoid} from "nanoid"
-import { Letter } from '../types/DataType'
+import { Letter, PopupItem } from '../types/DataType'
 
 const setId = () => {
   return nanoid();
 };
 
-
-const PopUpTable:FC = () => {
+const PopUpTable:FC = (props) => {
 
   const [value, setValue] = useState('')
   const [currentDate, setCurrentDate] = useState('')
   const [currentUser, setCurrentUser] = useState('Roman')
   const [comment, setComment] = useState('')
   const [item, setItem] = useState<Letter>(JSON.parse(localStorage.getItem('item') ?? ''))
-
-
+  const [tableData, setTableData] = useState(item.popupData)
 
   const handleChangeValue = (e: React.ChangeEvent<HTMLInputElement>) => {
     setValue(e.target.value)
@@ -37,24 +35,31 @@ const PopUpTable:FC = () => {
     setComment(e.target.value)
   }
 
-  // const addTableData = () => {
-  //   setCurrentDate((new Date()).toString())
-  //   setTableData([...tableData, {
-  //     value: value,
-  //     date: currentDate,
-  //     user: currentUser,
-  //     comment: comment
-  //   }])
-  //   console.log(`
-	// 	value ${value!== '' ? value : '0'},
-	// 	 ${currentUser},
-	// 	 ${ comment !== '' ? comment : 'default comment'}
-	// 	 `)
-  //   setValue('0')
-  //   setCurrentDate((new Date()).toString())
-  //   setCurrentUser('Roman')
-  //   setComment('')
-  // }
+  const closeWindow = () => {
+    window.opener.postMessage({messege: 'OK!', value: item}, '*')
+    window.close()
+  }
+
+  const addTableData = () => {
+    setCurrentDate((new Date()).toString())
+    // @ts-ignore тайпскрипт ругается, что tableData не массив, хотя tableData в любом случае массив...)
+    setTableData([...tableData, {
+      value: value,
+      date: currentDate,
+      user: currentUser,
+      comment: comment
+    }])
+    console.log(`
+		value ${value!== '' ? value : '0'},
+		 ${currentUser},
+		 ${ comment !== '' ? comment : 'default comment'}
+		 `)
+    setValue('0')
+    setCurrentDate((new Date()).toString())
+    setCurrentUser('Roman')
+    setComment('')
+    setItem({...item, popupData: tableData})
+  }
 
   useEffect(() => {
     setCurrentDate((new Date()).toString())
@@ -71,12 +76,10 @@ const PopUpTable:FC = () => {
               <TableCell colSpan={1}>user</TableCell>
               <TableCell colSpan={1}>comment</TableCell>
               <TableCell>
-                {/*<Button onClick={addTableData}>Add</Button>*/}
+                <Button onClick={addTableData}>Add</Button>
               </TableCell>
               <TableCell>
-                <Button onClick={() => {
-                  window.close()
-                }}>Close</Button>
+                <Button onClick={closeWindow}>Close</Button>
               </TableCell>
             </TableRow>
           </TableHead>
@@ -137,7 +140,3 @@ const PopUpTable:FC = () => {
 }
 
 export default PopUpTable
-
-function MyContext(MyContext: any): { xx: any; yy: any } {
-    throw new Error('Function not implemented.')
-}

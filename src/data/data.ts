@@ -12,19 +12,19 @@ export const DATA: Data = {
             {
               value: '4',
               date: new Date().toString(),
-              user: 'Petro',
+              user: 'Nikita',
               comment: 'any'
             },
             {
               value: '5',
               date: new Date().toString(),
-              user: 'Roman',
+              user: 'Mykyta',
               comment: 'any'
             },
             {
               value: '6',
               date: new Date().toString(),
-              user: 'Anna',
+              user: 'Kim',
               comment: 'any'
             },
           ]

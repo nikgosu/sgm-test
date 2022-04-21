@@ -23,6 +23,14 @@ const MyTable:FC<Props> = (props: Props) => {
   const regions = Object.entries(props.state)
   const letters = ['xx', 'yy', 'zz', 'ww', 'xx', 'yy', 'zz', 'ww', 'xx', 'yy', 'zz', 'ww']
 
+  const getResultObj = (id: number, value: number, dateRelease: string) => {
+    return {
+      id,
+      value,
+      dateRelease
+    }
+  }
+
   const getValueCell = (yearsObj: Region): Letter[] => {
 
     let result = []
@@ -32,7 +40,7 @@ const MyTable:FC<Props> = (props: Props) => {
       items.forEach((item, i) => {
         result.push(item)
       })
-      result.push({id: 22, value: items[0].value * items[2].value, dateRelease: `${items[0].dateRelease} - ${items[2].dateRelease}`})
+      result.push(getResultObj(22, items[0].value * items[2].value, `${items[0].dateRelease} - ${items[2].dateRelease}`))
     } else {
       result.push({id: 28, value: false}, {id: 29, value: false}, {id: 30, value: false})
     }
@@ -42,7 +50,7 @@ const MyTable:FC<Props> = (props: Props) => {
       items.forEach(item => {
         result.push(item)
       })
-      result.push({id: 23, value: items[0].value * items[2].value, dateRelease: `${items[0].dateRelease} - ${items[2].dateRelease}`})
+      result.push(getResultObj(23, items[0].value * items[2].value, `${items[0].dateRelease} - ${items[2].dateRelease}`))
     } else {
       result.push({id: 24, value: false}, {id: 25, value: false}, {id: 26, value: false}, {id: 27, value: false})
     }
@@ -52,7 +60,7 @@ const MyTable:FC<Props> = (props: Props) => {
       items.forEach(item => {
         result.push(item)
       })
-      result.push({id: 28, value: items[0].value * items[2].value, dateRelease: `${items[0].dateRelease} - ${items[2].dateRelease}`})
+      result.push(getResultObj(28, items[0].value * items[2].value, `${items[0].dateRelease} - ${items[2].dateRelease}`))
     }
 
     if (Object.entries(yearsObj)[1][0] === '2019') {
@@ -60,7 +68,7 @@ const MyTable:FC<Props> = (props: Props) => {
       items.forEach(item => {
         result.push(item)
       })
-      result.push({id: 27, value: items[0].value * items[2].value, dateRelease: `${items[0].dateRelease} - ${items[2].dateRelease}`})
+      result.push(getResultObj(27, items[0].value * items[2].value, `${items[0].dateRelease} - ${items[2].dateRelease}`))
     }
     return result
   }

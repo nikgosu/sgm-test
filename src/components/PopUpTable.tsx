@@ -17,7 +17,7 @@ const setId = () => {
 const PopUpTable:FC = (props) => {
 
   const [value, setValue] = useState('')
-  const [currentDate, setCurrentDate] = useState('')
+  const [currentDate, setCurrentDate] = useState((new Date()).toString())
   const [currentUser, setCurrentUser] = useState('Roman')
   const [comment, setComment] = useState('')
   const [item, setItem] = useState<Letter>(JSON.parse(localStorage.getItem('item') ?? ''))
@@ -40,30 +40,34 @@ const PopUpTable:FC = (props) => {
     window.close()
   }
 
-  const addTableData = () => {
+  const resetInpust = () => {
+    setValue('')
     setCurrentDate((new Date()).toString())
-    // @ts-ignore тайпскрипт ругается, что tableData не массив, хотя tableData в любом случае массив...)
-    setTableData([...tableData, {
-      value: value,
-      date: currentDate,
-      user: currentUser,
-      comment: comment
-    }])
+    setCurrentUser('Roman')
+    setComment('')
+  }
+
+  const logResult = () => {
     console.log(`
 		value ${value!== '' ? value : '0'},
 		 ${currentUser},
 		 ${ comment !== '' ? comment : 'default comment'}
-		 `)
-    setValue('0')
-    setCurrentDate((new Date()).toString())
-    setCurrentUser('Roman')
-    setComment('')
-    setItem({...item, popupData: tableData})
+    `)
   }
 
-  useEffect(() => {
+  const addTableData = () => {
     setCurrentDate((new Date()).toString())
-  }, [])
+    // @ts-ignore тайпскрипт ругается, что tableData не массив, хотя tableData в любом случае массив...)
+    setTableData([...tableData, {
+      value,
+      date: currentDate,
+      user: currentUser,
+      comment
+    }])
+    logResult()
+    resetInpust()
+    setItem({...item, popupData: tableData})
+  }
 
   return (
     <Paper sx={{ width: "100%" }}>
@@ -85,7 +89,7 @@ const PopUpTable:FC = (props) => {
           </TableHead>
           <TableBody>
             {
-              item?.popupData ? item.popupData.map(user => (
+              tableData ? tableData.map(user => (
                 <TableRow key={setId()}>
                   <TableCell key={setId()}>{user.value}</TableCell>
                   <TableCell key={setId()}>{user.date.toString()}</TableCell>

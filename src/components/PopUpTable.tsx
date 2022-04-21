@@ -65,15 +65,11 @@ const PopUpTable:FC = (props) => {
         user: currentUser,
         comment
       }]})
-    setIsNew(true)
   }
 
   useEffect(() => {
-    if (isNew) {
-      window.opener.postMessage({message: 'OK!', value: item}, '*')
-      setIsNew(false)
-    }
-  }, [item, isNew])
+    window.opener.postMessage({message: 'OK!', value: item}, '*')
+  }, [item])
 
   return (
     <Paper sx={{ width: "100%" }}>

@@ -106,9 +106,9 @@ const MyTable:FC<Props> = (props: Props) => {
           </TableHead>
           <TableBody>
             {
-              regions.map(region => (
+              regions.map(({...region}) => (
                 <TableRow key={setId()}>
-                  <TableCell key={setId()}>{region[0]}</TableCell>
+                  <TableCell>{region[0]}</TableCell>
                   {
                     getValueCell(region[1].G).map((item) => (
                       item.value !== false

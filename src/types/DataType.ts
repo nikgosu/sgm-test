@@ -36,6 +36,15 @@ export interface Data {
   Lvivska: G,
 }
 
+export interface PopUpItem {
+  value: string,
+  date: string,
+  user: string
+  comment: string
+}
+
+
+
 
 
 

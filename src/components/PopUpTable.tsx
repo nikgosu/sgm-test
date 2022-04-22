@@ -60,12 +60,14 @@ const PopUpTable:FC = (props) => {
     setCurrentDate((new Date()).toString())
     logResult()
     resetInpust()
-    setItem({...item, popupData: [...item.popupData, {
-        value,
-        date: currentDate,
-        user: currentUser,
-        comment
-      }]})
+   if (Array.isArray(item.popupData)) {
+     setItem({...item, popupData: [...item.popupData, {
+         value,
+         date: currentDate,
+         user: currentUser,
+         comment
+       }]})
+   }
   }
 
   useEffect(() => {

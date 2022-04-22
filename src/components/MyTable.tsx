@@ -7,8 +7,8 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import { nanoid } from "nanoid";
-import {Data, Letter, PopupItem, Region, Year} from "../types/DataType";
-import {FC, useState} from "react";
+import {Data, Letter, Region} from "../types/DataType";
+import {FC} from "react";
 
 interface Props {
   state: Data
@@ -19,8 +19,8 @@ const setId = () => {
   return nanoid();
 };
 
-const MyTable:FC<Props> = (props: Props) => {
-  const regions = Object.entries(props.state)
+const MyTable:FC<Props> = ({state, handleCellId}: Props) => {
+  const regions = Object.entries(state)
   const letters = ['xx', 'yy', 'zz', 'ww', 'xx', 'yy', 'zz', 'ww', 'xx', 'yy', 'zz', 'ww']
 
   const getResultObj = (id: number, value: number, dateRelease: string) => {
@@ -37,7 +37,7 @@ const MyTable:FC<Props> = (props: Props) => {
 
     if (Object.entries(yearsObj)[0][0] === '2017') {
       const items:Letter[] = Object.values(Object.entries(yearsObj)[0][1])
-      items.forEach((item, i) => {
+      items.forEach((item) => {
         result.push(item)
       })
       result.push(getResultObj(22, items[1].value * items[2].value, `${items[1].dateRelease} - ${items[2].dateRelease}`))
@@ -75,7 +75,7 @@ const MyTable:FC<Props> = (props: Props) => {
 
   const handlerCell = (id: number | undefined, item: Letter) => {
     if (id !== undefined) {
-      props.handleCellId(id, item)
+      handleCellId(id, item)
     }
   }
 

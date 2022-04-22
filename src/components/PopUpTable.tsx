@@ -9,20 +9,19 @@ import Paper from "@mui/material/Paper"
 import {Button, InputLabel, MenuItem, Select, SelectChangeEvent, TextField} from "@mui/material"
 import {nanoid} from "nanoid"
 
-import { Letter, PopupItem } from '../types/DataType'
+import { Letter } from '../types/DataType'
 
 
 const setId = () => {
   return nanoid();
 };
 
-const PopUpTable:FC = (props) => {
+const PopUpTable:FC = () => {
 
   const [value, setValue] = useState('')
   const [currentDate, setCurrentDate] = useState((new Date()).toString())
   const [currentUser, setCurrentUser] = useState('Roman')
   const [comment, setComment] = useState('')
-  const [isNew, setIsNew] = useState(false)
   const [item, setItem] = useState<Letter>(JSON.parse(localStorage.getItem('item') ?? ''))
 
   const handleChangeValue = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -41,7 +40,7 @@ const PopUpTable:FC = (props) => {
     window.close()
   }
 
-  const resetInpust = () => {
+  const resetInputs= () => {
     setValue('')
     setCurrentDate((new Date()).toString())
     setCurrentUser('Roman')
@@ -59,7 +58,7 @@ const PopUpTable:FC = (props) => {
   const addTableData = async () => {
     setCurrentDate((new Date()).toString())
     logResult()
-    resetInpust()
+    resetInputs()
    if (Array.isArray(item.popupData)) {
      setItem({...item, popupData: [...item.popupData, {
          value,

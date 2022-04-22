@@ -4,11 +4,11 @@ import { BrowserRouter, Route, Routes } from "react-router-dom"
 import * as React from 'react'
 import { DATA } from './data/data'
 import { useEffect, useState } from 'react'
-import { Letter, PopupItem, Region, Year } from './types/DataType'
+import { Letter } from './types/DataType'
 
 function App() {
 
-  const [state, setState] = useState(DATA)
+  const state = DATA
   const [cellId, setCellId] = useState(0)
   const [isNew, setIsNew] = useState(false)
   const [selectedCell, setSelectedCell] = useState<Letter>()
@@ -29,7 +29,7 @@ function App() {
     }
   }, [cellId, isNew])
 
-  const getMessege = (e: MessageEvent) => {
+  const getMessage = (e: MessageEvent) => {
     if (e.data.message === 'OK!') setEditedCell(e.data.value);
   }
 
@@ -40,7 +40,7 @@ function App() {
   }, [editedCell])
 
   useEffect(() => {
-    window.addEventListener('message', getMessege)
+    window.addEventListener('message', getMessage)
   }, [])
 
 

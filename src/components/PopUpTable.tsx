@@ -60,7 +60,6 @@ const PopUpTable:FC = (props) => {
     setCurrentDate((new Date()).toString())
     logResult()
     resetInpust()
-    // @ts-ignore тайпскрипт ругается, что item.popupData не массив, хотя item.popupData в любом случае массив...
     setItem({...item, popupData: [...item.popupData, {
         value,
         date: currentDate,

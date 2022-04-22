@@ -10,7 +10,7 @@ export interface Letter {
   id?: number
   value: any
   dateRelease?: string
-  popupData?: PopupItem[]
+  popupData: PopupItem[]
 }
 
 export interface Year {

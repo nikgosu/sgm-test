@@ -43,7 +43,6 @@ function App() {
     window.addEventListener('message', getMessage)
   }, [])
 
-  console.log(123)
   return (
     <BrowserRouter>
       <Routes>
